@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="cordova-plugin-rfidreader"
+        version="1.0.0">
+
+  <name>RFID Reader</name> 
+  <description>Use this plugin to scan the RFID tag in your Cordova/PhoneGap app.</description>
+  <author>Jiang Jie</author>
+  <keywords>rfid</keywords>
+  <license>SIMtech 1.0</license>
+
+  <engines>
+    <engine name="cordova" version=">=3.4.0"/>
+  </engines>
+
+  <asset src="www/reader.js" target="js/reader.js"/>
+
+  <js-module src="www/reader.js" name="reader">
+    <clobbers target="reader" />
+  </js-module>
+
+  <platform name="android">
+
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="Reader">
+        <param name="android-package" value="com.reader.plugin.Reader"/>
+      </feature>
+    </config-file>
+
+    <source-file src="src/android/aretepoplib.jar" target-dir="libs" framework="true" />    
+    <source-file src="src/android/Reader.java" target-dir="src/com/reader/plugin/"/>
+
+    <config-file target="AndroidManifest.xml" parent="/*">
+      <uses-permission android:name="android.permission.RECORD_AUDIO" />
+      <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+      <uses-permission android:name="android.permission.ACTION_HEADSET_PLUG" />
+    </config-file>
+    
+  </platform>
+
+</plugin>
