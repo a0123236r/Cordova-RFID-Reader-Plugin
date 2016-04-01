@@ -56,8 +56,13 @@ public class Reader extends CordovaPlugin implements iRcpEvent2 {
     @Override
     public void onTagWithTidReceived(int[] ints, int[] ints1) {
         tag_id = "";
-        for (int x = 0; x < ints.length; x++) {
-            tag_id = tag_id + String.valueOf(ints[x]);
+        for(int n= 2;n<ints.length;n++){
+            //ints content should divide 16 to EPC number
+            if(ints[n]<16){
+                tag_id += "0" +Integer.toString(ints[n],16);
+            }else {
+                tag_id += Integer.toString(ints[n],16);
+            }
         }
     }
 
